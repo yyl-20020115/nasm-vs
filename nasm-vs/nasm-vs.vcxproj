@@ -160,6 +160,7 @@
     <ClCompile Include="exprdump.c" />
     <ClCompile Include="exprlib.c" />
     <ClCompile Include="floats.c" />
+    <ClCompile Include="insndump.c" />
     <ClCompile Include="labels.c" />
     <ClCompile Include="listing.c" />
     <ClCompile Include="nasm.c" />
@@ -181,6 +182,7 @@
     <ClInclude Include="directiv.h" />
     <ClInclude Include="eval.h" />
     <ClInclude Include="floats.h" />
+    <ClInclude Include="insndump.h" />
     <ClInclude Include="listing.h" />
     <ClInclude Include="parser.h" />
     <ClInclude Include="pptok.h" />

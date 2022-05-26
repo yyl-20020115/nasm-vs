@@ -54,6 +54,7 @@
 #include "labels.h"
 #include "outform.h"
 #include "listing.h"
+#include "insndump.h"
 #include "iflag.h"
 #include "quote.h"
 #include "ver.h"
@@ -158,6 +159,9 @@ static bool depend_missing_ok = false;
 static const char *depend_target = NULL;
 static const char *depend_file = NULL;
 struct strlist *depend_list;
+
+static bool dump_yaml = false;
+static bool dump_only = false;
 
 static bool want_usage;
 static bool terminate_after_phase;
@@ -1002,6 +1006,13 @@ static bool process_arg(char *p, char *q, int pass)
         }
 
         switch (p[1]) {
+        //NOTICE: dump yaml
+        case '_':
+            dump_only = true;
+            break;
+        case 'Y':
+            dump_yaml = true;
+            break;
         case 's':
             if (pass == 1)
                 error_file = stdout;
@@ -1378,7 +1389,7 @@ static void process_respfile(FILE * rfile, int pass)
     while (1) {                 /* Loop to handle all lines in file */
         p = buffer;
         while (1) {             /* Loop to handle long lines */
-            q = fgets(p, bufsize - (p - buffer), rfile);
+            q = fgets(p, bufsize - (int)(p - buffer), rfile);
             if (!q)
                 break;
             p += strlen(p);
@@ -1634,6 +1645,10 @@ static void assemble_file(const char *fname, struct strlist *depend_list)
     uint64_t prev_offset_changed;
     int64_t stall_count = 0; /* Make sure we make forward progress... */
 
+    if (dump_yaml) {
+        ldump->init(fname);
+    }
+
     switch (cmd_sb) {
     case 16:
         break;
@@ -1728,11 +1743,25 @@ static void assemble_file(const char *fname, struct strlist *depend_list)
              * Here we parse our directives; this is not handled by the
              * main parser.
              */
-            if (process_directives(line))
+            bool done = false;
+            char* dup_line = _strdup(line);
+            if (dup_line != 0) {
+                done = process_directives(dup_line);
+                free(dup_line);
+            }
+            if (done)
+            {
+                if (dump_yaml && pass_type() == PASS_FIRST) {
+                    ldump->dump(globallineno, line, 0);
+                }
                 goto end_of_line; /* Just do final cleanup */
-
+            }
             /* Not a directive, or even something that starts with [ */
+            memset(&output_ins, 0, sizeof(output_ins));
             parse_line(line, &output_ins);
+            if (dump_yaml && pass_type() == PASS_FIRST) {
+                ldump->dump(globallineno, line, &output_ins);
+            }
             forward_refs(&output_ins);
             process_insn(&output_ins);
             cleanup_insn(&output_ins);
@@ -1797,6 +1826,8 @@ static void assemble_file(const char *fname, struct strlist *depend_list)
         }
 
         reset_warnings();
+        //NOTICE:dump_only
+        if (dump_only) break;
     }
 
     if (opt_verbose_info && pass_final()) {
@@ -1805,6 +1836,9 @@ static void assemble_file(const char *fname, struct strlist *depend_list)
     }
 
     lfmt->cleanup();
+    if (dump_yaml) {
+        ldump->cleanup();
+    }
     strlist_free(&warn_list);
 }
 
@@ -2260,6 +2294,8 @@ static void help(FILE *out)
     fputs(
         "\n"
         "    -l listfile   write listing to a list file\n"
+        "    -Y            write dump to a dump file (.yml)\n"
+        "    -_            dump only\n"
         "    -Lflags...    add optional information to the list file\n"
         "       -Lb        show builtin macro packages (standard and %use)\n"
         "       -Ld        show byte and repeat counts in decimal, not hex\n"

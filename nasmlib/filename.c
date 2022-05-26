@@ -61,3 +61,15 @@ const char *filename_set_extension(const char *inname, const char *extension)
 
     return p;
 }
+const char* filename_append_extension(const char* inname, const char* extension)
+{
+    size_t elen = strlen(extension);
+    size_t baselen = strlen(inname);
+
+    char* p = nasm_malloc(baselen + elen + 1);
+
+    memcpy(p, inname, baselen);
+    memcpy(p + baselen, extension, elen + 1);
+
+    return p;
+}

@@ -254,6 +254,7 @@ int32_t seg_alloc(void);
  * Add/replace or remove an extension to the end of a filename
  */
 const char *filename_set_extension(const char *inname, const char *extension);
+const char *filename_append_extension(const char* inname, const char* extension);
 
 /*
  * Utility macros...

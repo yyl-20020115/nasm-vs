@@ -84,6 +84,9 @@
     <ClCompile Include="warnings.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="insndump.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="assemble.h">
@@ -120,6 +123,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="tokens.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="insndump.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
