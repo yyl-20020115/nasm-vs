@@ -2789,7 +2789,7 @@ static int process_ea(operand *input, ea *output, int bits,
     int addrbits = ins->addr_size;
     int eaflags = input->eaflags;
     const char *errmsg = NULL;
-
+    bool use_rip = false;
     errmsg = NULL;
 
     output->type    = EA_SCALAR;
@@ -2833,7 +2833,14 @@ static int process_ea(operand *input, ea *output, int bits,
                 "register-register operations";
             goto err;
         }
-
+        opflags_t ot = input->type;
+        int of = input->eaflags;
+        if (input->indexreg == R_RIP) {
+            input->indexreg = R_RBP;
+            input->type |= IP_REL;
+            input->eaflags |= EAF_MIB;
+            use_rip = true;
+        }
         if (input->basereg == -1 &&
             (input->indexreg == -1 || input->scale == 0)) {
             /*
@@ -3107,6 +3114,9 @@ static int process_ea(operand *input, ea *output, int bits,
 
                     output->sib_present = false;
                     output->bytes       = (bt == -1 || mod == 2 ? 4 : mod);
+                    if (use_rip) {
+                        mod = 0;
+                    }
                     output->modrm       = GEN_MODRM(mod, rfield, rm);
                 } else {
                     /* we need a SIB */
@@ -3237,6 +3247,11 @@ static int process_ea(operand *input, ea *output, int bits,
                 output->bytes       = mod;      /* bytes of offset needed */
                 output->modrm       = GEN_MODRM(mod, rfield, rm);
             }
+        }
+        if (use_rip) {
+            input->indexreg = R_RIP;
+            input->type = ot;
+            input->eaflags = of;
         }
     }
 

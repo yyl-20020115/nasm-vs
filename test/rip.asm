@@ -1,6 +1,6 @@
 [Bits 64]
 start:
 
-	lea rbp, [rax+0x258]
+	lea rbp, [rip + 0x258]
 
 	ret

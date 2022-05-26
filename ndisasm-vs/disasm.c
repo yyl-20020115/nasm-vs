@@ -1445,8 +1445,12 @@ int32_t disasm(uint8_t *data, int32_t data_size, char *output, int outbufsize, i
         offs = o->offset;
         if (o->segment & SEG_RELATIVE) {
             //FIXED by YILIN: here should not add length for REL+offset
-            //offs += offset + length;
-            offs += offset;
+            if (o->eaflags & EAF_REL) {
+                offs += offset;
+            }
+            else {
+                offs += offset + length;
+            }
             /*
              * sort out wraparound
              */
