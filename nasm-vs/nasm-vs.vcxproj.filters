@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="assemble.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="directbl.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="directiv.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="error.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="eval.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="exprdump.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="exprlib.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="floats.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="labels.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="listing.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="nasm.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="parser.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pptok.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="pragma.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="preproc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="quote.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rdstrnum.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="segalloc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="srcfile.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdscan.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="strfunc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="tokhash.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="warnings.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="assemble.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="directiv.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="eval.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="floats.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="listing.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="parser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="pptok.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="preproc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="quote.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="srcfile.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdscan.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="tokens.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

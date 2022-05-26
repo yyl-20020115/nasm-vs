@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="alloc.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="asprintf.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="badenum.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="bsi.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="crc32.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="crc64.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="errfile.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="file.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="filename.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="hashtbl.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ilog2.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="md5c.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="mmap.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="nctype.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="path.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="perfhash.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="raa.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rbtree.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="readnum.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="realpath.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="rlimit.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="saa.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="string.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="strlist.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ver.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="zerobuf.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stdlib\snprintf.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stdlib\strlcpy.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stdlib\strnlen.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stdlib\strrchrnul.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\stdlib\vsnprintf.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\common.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\codeview.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\legacy.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\nulldbg.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\nullout.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outaout.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outas86.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outbin.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outcoff.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outdbg.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outelf.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outform.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outieee.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outlib.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outmacho.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outobj.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\output\outrdf2.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\disp8.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\iflag.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\insnsa.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\insnsb.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\insnsd.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\insnsn.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\regdis.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\regflags.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\regs.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\asm-x86\regvals.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\macros\macros.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\misc\crcgen.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="alloc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="file.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\version.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\dwarf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\elf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\macho.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\outelf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\outform.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\outlib.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\pecoff.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\output\stabs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\asm-x86\iflaggen.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\asm-x86\insnsi.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\asm-x86\regdis.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\asm-x86\regs.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
