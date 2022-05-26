@@ -1,3 +1,14 @@
+What's new?
+
+* rip is now supported for [Rel addr] = [RIP + addr]
+* yaml dump (-Y for dumping, -_ for disabling normal output)
+
+
+Yilin
+
+===========================
+
+
 NASM, the Netwide Assembler
 ===========================
 
