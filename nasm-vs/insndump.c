@@ -1,5 +1,5 @@
 #include "insndump.h"
-
+extern bool dump_prep;
 FILE* dump_fp = 0;
 static void dump_cleanup() {
     if (dump_fp != 0) {
@@ -24,8 +24,8 @@ static const char* const condition_name[32] = {
 };
 
 
-static void dump_dump(int64_t lineno, char* line, const insn* instruction) {
-    if (instruction != 0) {
+static void dump_dump(int64_t lineno, char* line, const insn* instruction, bool pre) {
+    if (instruction != 0 && line!=0 && strlen(line)>0) {
         fprintf(dump_fp, "- instruction:\n");
         fprintf(dump_fp, "  line: %lld\n", lineno);
         fprintf(dump_fp, "  text: \"%s\"\n", line);
@@ -89,10 +89,17 @@ static void dump_dump(int64_t lineno, char* line, const insn* instruction) {
         }
 
     }
-    else {
-        fprintf(dump_fp, "- directive:\n");
-        fprintf(dump_fp, "  line: %lld\n", lineno);
-        fprintf(dump_fp, "  text: \"%s\"\n", line);
+    else if(line != 0 && strlen(line) > 0) {
+        if (!pre) {
+            fprintf(dump_fp, "- directive:\n");
+            fprintf(dump_fp, "  line: %lld\n", lineno);
+            fprintf(dump_fp, "  text: \"%s\"\n", line);
+        }
+        else if(dump_prep) {
+            fprintf(dump_fp, "- preproc:\n");
+            fprintf(dump_fp, "  line: %lld\n", lineno);
+            fprintf(dump_fp, "  text: \"%s\"\n", line);
+        }
     }
 }
 

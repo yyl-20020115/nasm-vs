@@ -5,7 +5,7 @@
 struct ldump {
     void (*init)(const char* fname);
     void (*cleanup)(void);
-    void (*dump)(int64_t lineno, char* line, insn* i);
+    void (*dump)(int64_t lineno, char* line, insn* i,bool pre);
 };
 
 const struct ldump* ldump;

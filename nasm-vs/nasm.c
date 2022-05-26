@@ -160,7 +160,8 @@ static const char *depend_target = NULL;
 static const char *depend_file = NULL;
 struct strlist *depend_list;
 
-static bool dump_yaml = false;
+extern bool dump_yaml = false;
+extern bool dump_prep = false;
 static bool dump_only = false;
 
 static bool want_usage;
@@ -1007,8 +1008,11 @@ static bool process_arg(char *p, char *q, int pass)
 
         switch (p[1]) {
         //NOTICE: dump yaml
-        case '_':
+        case 'z':
             dump_only = true;
+            break;
+        case '_':
+            dump_prep = true;
             break;
         case 'Y':
             dump_yaml = true;
@@ -1752,7 +1756,7 @@ static void assemble_file(const char *fname, struct strlist *depend_list)
             if (done)
             {
                 if (dump_yaml && pass_type() == PASS_FIRST) {
-                    ldump->dump(globallineno, line, 0);
+                    ldump->dump(globallineno, line, 0, false);
                 }
                 goto end_of_line; /* Just do final cleanup */
             }
@@ -1760,7 +1764,7 @@ static void assemble_file(const char *fname, struct strlist *depend_list)
             memset(&output_ins, 0, sizeof(output_ins));
             parse_line(line, &output_ins);
             if (dump_yaml && pass_type() == PASS_FIRST) {
-                ldump->dump(globallineno, line, &output_ins);
+                ldump->dump(globallineno, line, &output_ins, false);
             }
             forward_refs(&output_ins);
             process_insn(&output_ins);

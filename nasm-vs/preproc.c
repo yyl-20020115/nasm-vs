@@ -76,7 +76,7 @@
 #include "tables.h"
 #include "listing.h"
 #include "dbginfo.h"
-
+#include "insndump.h"
 /*
  * Preprocessor execution options that can be controlled by %pragma or
  * other directives.  This structure is initialized to zero on each
@@ -1188,7 +1188,7 @@ static char *line_from_stdmac(void)
 
     return line;
 }
-
+extern bool dump_yaml;
 /*
  * Read a line from a file. Return NULL on end of file.
  */
@@ -1262,7 +1262,9 @@ static char *line_from_file(FILE *f)
 
         *p++ = c;
     } while (c);
-
+    if (dump_yaml && ldump!=0) {
+        ldump->dump(istk->where.lineno, buffer, 0,true);
+    }
     return buffer;
 }
 
@@ -1274,11 +1276,13 @@ static char *read_line(void)
     char *line;
     FILE *f = istk->fp;
 
-    if (f)
+    if (f) {
         line = line_from_file(f);
-    else
+    }
+    else 
+    {
         line = line_from_stdmac();
-
+    }
     if (!line)
         return NULL;
 

@@ -1,15 +1,12 @@
 - directive:
-  line: 1
+  line: 3
   text: "[Bits 64]"
 - instruction:
-  line: 2
+  line: 4
   text: "start:"
   label: "start"
 - instruction:
-  line: 3
-  text: ""
-- instruction:
-  line: 4
+  line: 6
   text: " lea rbp, [rip + 0x258]"
   opcode: "lea"
   operands:
@@ -22,10 +19,7 @@
     scale: 1
     offset: 0x0000000000000258
 - instruction:
-  line: 5
-  text: ""
-- instruction:
-  line: 6
+  line: 8
   text: " ret"
   opcode: "ret"
   operands:
