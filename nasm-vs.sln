@@ -3,11 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nasm-vs", "nasm-vs\nasm-vs.vcxproj", "{AA0B3859-C544-409A-9B78-D9D17C62451D}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nasm", "nasm-vs\nasm-vs.vcxproj", "{AA0B3859-C544-409A-9B78-D9D17C62451D}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "nasmlib", "nasmlib\nasmlib.vcxproj", "{EF899816-BEF8-480C-899E-BC69F3BE3EBD}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ndisasm-vs", "ndisasm-vs\ndisasm-vs.vcxproj", "{5535E037-01D7-4B77-9732-9BCED548BF6A}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ndisasm", "ndisasm-vs\ndisasm-vs.vcxproj", "{5535E037-01D7-4B77-9732-9BCED548BF6A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nasm-use", "nasm-use", "{0BE5B453-D564-4DC7-8ED1-0EA432A7441F}"
+	ProjectSection(SolutionItems) = preProject
+		nasm-use\nasm.props = nasm-use\nasm.props
+		nasm-use\nasm.targets = nasm-use\nasm.targets
+		nasm-use\nasm.xml = nasm-use\nasm.xml
+		nasm-use\ReadMe.txt = nasm-use\ReadMe.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

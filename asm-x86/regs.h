@@ -68,11 +68,13 @@ enum reg_enum {
     R_ECX,
     R_EDI,
     R_EDX,
+    R_EIP,
     R_ES,
     R_ESI,
     R_ESP,
     R_FS,
     R_GS,
+    R_IP,
     R_K0,
     R_K1,
     R_K2,
@@ -127,6 +129,7 @@ enum reg_enum {
     R_RCX,
     R_RDI,
     R_RDX,
+    R_RIP,
     R_RSI,
     R_RSP,
     R_SEGR6,
@@ -259,7 +262,7 @@ enum reg_enum {
     REG_ENUM_LIMIT
 };
 
-#define EXPR_REG_END 248
+#define EXPR_REG_END 251
 
 #define REG_NUM_AH       4
 #define REG_NUM_AL       0
@@ -321,11 +324,13 @@ enum reg_enum {
 #define REG_NUM_ECX      1
 #define REG_NUM_EDI      7
 #define REG_NUM_EDX      2
+#define REG_NUM_EIP      0
 #define REG_NUM_ES       0
 #define REG_NUM_ESI      6
 #define REG_NUM_ESP      4
 #define REG_NUM_FS       4
 #define REG_NUM_GS       5
+#define REG_NUM_IP       0
 #define REG_NUM_K0       0
 #define REG_NUM_K1       1
 #define REG_NUM_K2       2
@@ -380,6 +385,7 @@ enum reg_enum {
 #define REG_NUM_RCX      1
 #define REG_NUM_RDI      7
 #define REG_NUM_RDX      2
+#define REG_NUM_RIP      0
 #define REG_NUM_RSI      6
 #define REG_NUM_RSP      4
 #define REG_NUM_SEGR6    6

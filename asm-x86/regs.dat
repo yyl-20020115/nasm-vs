@@ -85,6 +85,9 @@ dil	REG8NA		reg8_rex	7
 di	REG16NA		reg16		7
 edi	REG32NA		reg32		7
 rdi	REG64NA		reg64		7
+ip	IP_REL		reg16		0		
+eip	IP_REL		reg32		0
+rip	IP_REL		reg64		0
 r8-15b	REG8NA		reg8_rex	8
 r8-15w	REG16NA		reg16		8
 r8-15d	REG32NA		reg32		8

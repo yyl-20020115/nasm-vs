@@ -65,11 +65,13 @@ const opflags_t nasm_reg_flags[] = {
     REG_ECX,        /* ecx   */
     REG32NA,        /* edi   */
     REG_EDX,        /* edx   */
+    IP_REL,         /* eip   */
     REG_ES,         /* es    */
     REG32NA,        /* esi   */
     REG32NA,        /* esp   */
     REG_FS,         /* fs    */
     REG_GS,         /* gs    */
+    IP_REL,         /* ip    */
     OPMASK0,        /* k0    */
     OPMASKREG,      /* k1    */
     OPMASKREG,      /* k2    */
@@ -124,6 +126,7 @@ const opflags_t nasm_reg_flags[] = {
     REG_RCX,        /* rcx   */
     REG64NA,        /* rdi   */
     REG_RDX,        /* rdx   */
+    IP_REL,         /* rip   */
     REG64NA,        /* rsi   */
     REG64NA,        /* rsp   */
     REG_SEG67,      /* segr6 */

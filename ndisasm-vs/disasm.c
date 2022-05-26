@@ -1444,7 +1444,9 @@ int32_t disasm(uint8_t *data, int32_t data_size, char *output, int outbufsize, i
 
         offs = o->offset;
         if (o->segment & SEG_RELATIVE) {
-            offs += offset + length;
+            //FIXED by YILIN: here should not add length for REL+offset
+            //offs += offset + length;
+            offs += offset;
             /*
              * sort out wraparound
              */
@@ -1570,7 +1572,10 @@ int32_t disasm(uint8_t *data, int32_t data_size, char *output, int outbufsize, i
                          o->disp_size == 16 ? "word " :
                          ""));
             if (o->eaflags & EAF_REL)
-                slen += snprintf(output + slen, outbufsize - slen, "rel ");
+            {
+                //FIXED: by yilin (use rip instead of rel, this has to be x64)
+                slen += snprintf(output + slen, outbufsize - slen, "rip + ");
+            }
             if (segover) {
                 slen +=
                     snprintf(output + slen, outbufsize - slen, "%s:",

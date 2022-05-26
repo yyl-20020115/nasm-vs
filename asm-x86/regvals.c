@@ -64,11 +64,13 @@ const int nasm_regvals[] = {
      1,  /* ecx   */
      7,  /* edi   */
      2,  /* edx   */
+     0,  /* eip   */
      0,  /* es    */
      6,  /* esi   */
      4,  /* esp   */
      4,  /* fs    */
      5,  /* gs    */
+     0,  /* ip    */
      0,  /* k0    */
      1,  /* k1    */
      2,  /* k2    */
@@ -123,6 +125,7 @@ const int nasm_regvals[] = {
      1,  /* rcx   */
      7,  /* rdi   */
      2,  /* rdx   */
+     0,  /* rip   */
      6,  /* rsi   */
      4,  /* rsp   */
      6,  /* segr6 */

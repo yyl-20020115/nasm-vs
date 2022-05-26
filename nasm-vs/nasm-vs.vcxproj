@@ -24,6 +24,7 @@
     <ProjectGuid>{aa0b3859-c544-409a-9b78-d9d17c62451d}</ProjectGuid>
     <RootNamespace>nasmvs</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>nasm</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
