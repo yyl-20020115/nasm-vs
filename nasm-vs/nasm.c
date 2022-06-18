@@ -160,6 +160,7 @@ static const char *depend_target = NULL;
 static const char *depend_file = NULL;
 struct strlist *depend_list;
 
+extern bool dump_yaml_debug = false;
 extern bool dump_yaml = false;
 extern bool dump_prep = false;
 static bool dump_only = false;
@@ -1007,6 +1008,10 @@ static bool process_arg(char *p, char *q, int pass)
         }
 
         switch (p[1]) {
+        //NOTICE: dump yaml for debug
+        case 'b':
+            dump_yaml_debug = true;
+            break;
         //NOTICE: dump yaml
         case 'z':
             dump_only = true;
