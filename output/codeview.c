@@ -305,130 +305,130 @@ static void cv8_output(int type, void *param)
 
 static void build_symbol_table(struct coff_Section *const sect);
 static void build_type_table(struct coff_Section *const sect);
-
-static void cv8_cleanup(void)
+static void dump_debug_yaml()
 {
-    struct cv8_symbol *sym;
-    struct source_file *file, *ftmp;
+    struct source_file* file = 0;
+    struct linepair* li = 0;
+    struct cv8_symbol* sym = 0;
+    FILE* fp = 0;
+    char* yaml_dump_file = filename_append_extension(outname, ".debug.yml");
+    if (0 != yaml_dump_file) {
+        if (0 != (fp = fopen(yaml_dump_file, "w"))) {
+            fprintf(fp, "info:\n");
+            fprintf(fp, "  creator: \"%s\"\n", "The Netwide Assembler " NASM_VER);
+            fprintf(fp, "  version: \"%d.%d.%d\"\n", NASM_MAJOR_VER, NASM_MINOR_VER, NASM_SUBMINOR_VER * 100 + NASM_PATCHLEVEL_VER);
+            fprintf(fp, "  output: \"%s\"\n", outname);
+            fprintf(fp, "  language: \"%s\"\n", "ASM");
+            if (win64)
+            {
+                fprintf(fp, "  machine: 0x00D0\n");
+            }
+            else if (win32)
+            {
+                fprintf(fp, "  machine: 0x0006\n");
+            }
 
-    struct coff_Section *symbol_sect = coff_sects[cv8_state.symbol_sect];
-    struct coff_Section *type_sect = coff_sects[cv8_state.type_sect];
-
-    cv8_state.outfile.name = nasm_realpath(outname);
-    cv8_state.outfile.namebytes = strlen(cv8_state.outfile.name) + 1;
-
-    if (dump_yaml_debug)
-    {
-        char* yaml_dump_file = filename_append_extension(outname, ".debug.yml");
-        if (yaml_dump_file != 0) {
-            FILE* fp = fopen(yaml_dump_file, "w");
-            if (fp != 0) {
-                fprintf(fp, "info:\n");
-                fprintf(fp, "  creator: \"%s\"\n", "The Netwide Assembler " NASM_VER);
-                fprintf(fp, "  version: \"%d.%d.%d\"\n", NASM_MAJOR_VER, NASM_MINOR_VER, NASM_SUBMINOR_VER * 100 + NASM_PATCHLEVEL_VER);
-                fprintf(fp, "  output: \"%s\"\n", outname);
-                fprintf(fp, "  language: \"%s\"\n", "ASM");
-                if (win64)
-                {
-                    fprintf(fp, "  machine: 0x00D0\n");
-                }
-                else if (win32) {
-                    fprintf(fp, "  machine: 0x0006\n");
-                }
-
-                struct linepair* li = 0;
-                //source and line numbers:
-                list_for_each(file, cv8_state.source_files) {
-                    fprintf(fp, "sources:\n");
-                    fprintf(fp, "  - name: \"%s\"\n", file->filename);
-                    fprintf(fp, "    line-count: %d\n", file->num_lines);
-                    fprintf(fp, "    locations:\n");
-                    /* the pairs */
-                    saa_rewind(file->lines);
-                    while ((li = saa_rstruct(file->lines))) {
+            //source and line numbers:
+            list_for_each(file, cv8_state.source_files) {
+                fprintf(fp, "sources:\n");
+                fprintf(fp, "  - name: \"%s\"\n", file->filename);
+                fprintf(fp, "    line-count: %d\n", file->num_lines);
+                fprintf(fp, "    locations:\n");
+                /* the pairs */
+                saa_rewind(file->lines);
+                while ((li = saa_rstruct(file->lines))) {
                     fprintf(fp, "      - file-offset: 0x%08X\n", li->file_offset);
                     fprintf(fp, "        line-number: %d\n", li->linenumber);
-                    }
                 }
+            }
 
-                fprintf(fp, "symbols:\n");
-
-                struct cv8_symbol* sym;
-                saa_rewind(cv8_state.symbols);
-                while ((sym = saa_rstruct(cv8_state.symbols))) {
+            fprintf(fp, "symbols:\n");
+            saa_rewind(cv8_state.symbols);
+            while ((sym = saa_rstruct(cv8_state.symbols))) {
                 fprintf(fp, "  - name: \"%s\"\n", sym->name);
                 fprintf(fp, "    section: 0x%04X\n", sym->section);
                 fprintf(fp, "    offset: 0x%08X\n", sym->secrel);
                 fprintf(fp, "    size: 0x%08X\n", sym->size);
                 fprintf(fp, "    type: \"");
 
-                    switch (sym->type) {
-                    case SYMTYPE_LDATA:
-                        fprintf(fp, "LDATA");
-                        break;
-
-                    case SYMTYPE_GDATA:
-                        fprintf(fp, "GDATA");
-                        break;
-
-                    case SYMTYPE_PROC:
-                        fprintf(fp, "PROC");
-                        break;
-                    case SYMTYPE_CODE:
-                        fprintf(fp, "CODE");
-                        break;
-                    default:
-                        fprintf(fp, "NONE");
-                        break;
-                    }
-                    fprintf(fp, "\"\n");
-
-                    fprintf(fp, "    stype: \"");
-                    switch (sym->symtype) {
-                    case TYPE_UNREGISTERED:
-                        fprintf(fp, "NONE");
-                        break;
-                    case TYPE_BYTE:
-                        fprintf(fp, "BYTE");
-                        break;
-                    case TYPE_WORD:
-                        fprintf(fp, "WORD");
-                        break;
-                    case TYPE_DWORD:
-                        fprintf(fp, "DWORD");
-                        break;
-                    case TYPE_QUAD:
-                        fprintf(fp, "QUAD");
-                        break;
-                    case TYPE_REAL32:
-                        fprintf(fp, "REAL32");
-                        break;
-                    case TYPE_REAL64:
-                        fprintf(fp, "REAL64");
-                        break;
-                    case TYPE_REAL80:
-                        fprintf(fp, "REAL80");
-                        break;
-                    case TYPE_REAL128:
-                        fprintf(fp, "REAL128");
-                        break;
-                    case TYPE_REAL256:
-                        fprintf(fp, "REAL256");
-                        break;
-                    case TYPE_REAL512:
-                        fprintf(fp, "REAL512");
-                        break;
-                    }
-                    fprintf(fp, "\"\n");
-                    fprintf(fp, "    bits: %d\n", win64?64:32);
+                switch (sym->type) {
+                case SYMTYPE_LDATA:
+                    fprintf(fp, "LDATA");
+                    break;
+                case SYMTYPE_GDATA:
+                    fprintf(fp, "GDATA");
+                    break;
+                case SYMTYPE_PROC:
+                    fprintf(fp, "PROC");
+                    break;
+                case SYMTYPE_CODE:
+                    fprintf(fp, "CODE");
+                    break;
+                default:
+                    fprintf(fp, "NONE");
+                    break;
                 }
+                fprintf(fp, "\"\n");
 
-                fclose(fp);
+                fprintf(fp, "    stype: \"");
+                switch (sym->symtype) {
+                case TYPE_UNREGISTERED:
+                    fprintf(fp, "NONE");
+                    break;
+                case TYPE_BYTE:
+                    fprintf(fp, "BYTE");
+                    break;
+                case TYPE_WORD:
+                    fprintf(fp, "WORD");
+                    break;
+                case TYPE_DWORD:
+                    fprintf(fp, "DWORD");
+                    break;
+                case TYPE_QUAD:
+                    fprintf(fp, "QUAD");
+                    break;
+                case TYPE_REAL32:
+                    fprintf(fp, "REAL32");
+                    break;
+                case TYPE_REAL64:
+                    fprintf(fp, "REAL64");
+                    break;
+                case TYPE_REAL80:
+                    fprintf(fp, "REAL80");
+                    break;
+                case TYPE_REAL128:
+                    fprintf(fp, "REAL128");
+                    break;
+                case TYPE_REAL256:
+                    fprintf(fp, "REAL256");
+                    break;
+                case TYPE_REAL512:
+                    fprintf(fp, "REAL512");
+                    break;
+                default:
+                    fprintf(fp, "NONE");
+                    break;
+                }
+                fprintf(fp, "\"\n");
+                fprintf(fp, "    bits: %d\n", win64 ? 64 : 32);
             }
-
-            nasm_free(yaml_dump_file);
+            fclose(fp);
         }
+        nasm_free(yaml_dump_file);
     }
+}
+
+static void cv8_cleanup(void)
+{
+    struct cv8_symbol *sym = 0;
+    struct source_file *file = 0, *ftmp = 0;
+    struct coff_Section *symbol_sect = coff_sects[cv8_state.symbol_sect];
+    struct coff_Section *type_sect = coff_sects[cv8_state.type_sect];
+
+    cv8_state.outfile.name = nasm_realpath(outname);
+    cv8_state.outfile.namebytes = strlen(cv8_state.outfile.name) + 1;
+    //NOTICE: modified by yilin
+    if (dump_yaml_debug) dump_debug_yaml();
 
     build_symbol_table(symbol_sect);
     build_type_table(type_sect);
