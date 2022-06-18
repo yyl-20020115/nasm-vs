@@ -321,30 +321,46 @@ static void cv8_cleanup(void)
     {
         char* yaml_dump_file = filename_append_extension(outname, ".debug.yml");
         if (yaml_dump_file != 0) {
-            FILE* fp = fopen(yaml_dump_file, "a");
+            FILE* fp = fopen(yaml_dump_file, "w");
             if (fp != 0) {
+                fprintf(fp, "info:\n");
+                fprintf(fp, "  creator: \"%s\"\n", "The Netwide Assembler " NASM_VER);
+                fprintf(fp, "  version: \"%d.%d.%d\"\n", NASM_MAJOR_VER, NASM_MINOR_VER, NASM_SUBMINOR_VER * 100 + NASM_PATCHLEVEL_VER);
+                fprintf(fp, "  output: \"%s\"\n", outname);
+                fprintf(fp, "  language: \"%s\"\n", "ASM");
+                if (win64)
+                {
+                    fprintf(fp, "  machine: 0x00D0\n");
+                }
+                else if (win32) {
+                    fprintf(fp, "  machine: 0x0006\n");
+                }
+
                 struct linepair* li = 0;
                 //source and line numbers:
                 list_for_each(file, cv8_state.source_files) {
-                    fprintf(fp, "- sources:\n");
-                    fprintf(fp, "  name : %s\n", file->filename);
-                    fprintf(fp, "  lines : %d\n", file->num_lines);
-                    fprintf(fp, "  - offset-lines:\n");
+                    fprintf(fp, "sources:\n");
+                    fprintf(fp, "  - name: \"%s\"\n", file->filename);
+                    fprintf(fp, "    line-count: %d\n", file->num_lines);
+                    fprintf(fp, "    locations:\n");
                     /* the pairs */
                     saa_rewind(file->lines);
                     while ((li = saa_rstruct(file->lines))) {
-                        fprintf(fp, "    offset:%08X\n", li->file_offset);
-                        fprintf(fp, "    line:%d\n", li->linenumber);
+                    fprintf(fp, "      - file-offset: 0x%08X\n", li->file_offset);
+                    fprintf(fp, "        line-number: %d\n", li->linenumber);
                     }
                 }
 
-                fprintf(fp, "- symbols:\n");
+                fprintf(fp, "symbols:\n");
 
                 struct cv8_symbol* sym;
                 saa_rewind(cv8_state.symbols);
                 while ((sym = saa_rstruct(cv8_state.symbols))) {
-                    fprintf(fp, "  name : %s\n", sym->name);
-                    fprintf(fp, "  type : ");
+                fprintf(fp, "  - name: \"%s\"\n", sym->name);
+                fprintf(fp, "    section: 0x%04X\n", sym->section);
+                fprintf(fp, "    offset: 0x%08X\n", sym->secrel);
+                fprintf(fp, "    size: 0x%08X\n", sym->size);
+                fprintf(fp, "    type: \"");
 
                     switch (sym->type) {
                     case SYMTYPE_LDATA:
@@ -365,9 +381,9 @@ static void cv8_cleanup(void)
                         fprintf(fp, "NONE");
                         break;
                     }
-                    fprintf(fp, "\n");
+                    fprintf(fp, "\"\n");
 
-                    fprintf(fp, "  stype : ");
+                    fprintf(fp, "    stype: \"");
                     switch (sym->symtype) {
                     case TYPE_UNREGISTERED:
                         fprintf(fp, "NONE");
@@ -403,8 +419,8 @@ static void cv8_cleanup(void)
                         fprintf(fp, "REAL512");
                         break;
                     }
-                    fprintf(fp, "\n");
-                    fprintf(fp, "  Bits : %d\n", win64?64:32);
+                    fprintf(fp, "\"\n");
+                    fprintf(fp, "    bits: %d\n", win64?64:32);
                 }
 
                 fclose(fp);

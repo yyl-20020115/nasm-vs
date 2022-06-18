@@ -1009,7 +1009,7 @@ static bool process_arg(char *p, char *q, int pass)
 
         switch (p[1]) {
         //NOTICE: dump yaml for debug
-        case 'b':
+        case 'k':
             dump_yaml_debug = true;
             break;
         //NOTICE: dump yaml
