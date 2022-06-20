@@ -330,7 +330,7 @@ static void dump_debug_yaml()
 
             //source and line numbers:
             list_for_each(file, cv8_state.source_files) {
-                fprintf(fp, "sources:\n");
+                fprintf(fp, "source-files:\n");
                 fprintf(fp, "  - name: \"%s\"\n", file->filename);
                 fprintf(fp, "    line-count: %d\n", file->num_lines);
                 fprintf(fp, "    locations:\n");
